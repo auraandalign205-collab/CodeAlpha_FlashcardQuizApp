@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeAlpha - Flashcard Quiz App</title>
+    <!-- CSS File Link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Flashcard Quiz App</h1>
+        <p>CodeAlpha App Development Internship - Task 1</p>
+    </header>
+
+    <div class="container">
+        <!-- Quiz Layout View -->
+        <div id="quiz-section">
+            <div class="flashcard-wrapper">
+                <div class="flashcard" id="flashcard" onclick="toggleFlip()">
+                    <!-- Front Side (Question) -->
+                    <div class="card-front">
+                        <span class="card-label">Question</span>
+                        <div class="card-content" id="question-text">Loading question...</div>
+                        <button class="btn btn-primary" onclick="event.stopPropagation(); toggleFlip();">Show Answer</button>
+                    </div>
+                    <!-- Back Side (Answer) -->
+                    <div class="card-back">
+                        <span class="card-label">Answer</span>
+                        <div class="card-content" id="answer-text">Loading answer...</div>
+                        <button class="btn btn-secondary" onclick="event.stopPropagation(); toggleFlip();">Show Question</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="navigation-controls" style="margin-top: 1.5rem;">
+                <button class="btn btn-secondary" id="prev-btn" onclick="navigateCard(-1)">Previous</button>
+                <span class="progress-text" id="progress-index">0 / 0</span>
+                <button class="btn btn-secondary" id="next-btn" onclick="navigateCard(1)">Next</button>
+            </div>
+
+            <!-- Management Buttons -->
+            <div class="action-panel">
+                <button class="btn btn-secondary" onclick="showForm('add')">Add New Card</button>
+                <button class="btn btn-secondary" id="edit-btn" onclick="showForm('edit')">Edit Current</button>
+                <button class="btn btn-danger" id="delete-btn" onclick="deleteCard()">Delete Current</button>
+            </div>
+        </div>
+
+        <!-- Empty State UI -->
+        <div id="empty-section" class="empty-state hidden">
+            <p style="margin-bottom: 1rem; color: #6b7280;">No flashcards available. Add a custom card to get started!</p>
+            <button class="btn btn-primary" onclick="showForm('add')">Create First Flashcard</button>
+        </div>
+
+        <!-- Pop-up Form for Add/Edit -->
+        <div id="form-section" class="form-card hidden">
+            <h3 id="form-title">Add New Flashcard</h3>
+            <form id="flashcard-form" onsubmit="handleFormSubmit(event)">
+                <input type="hidden" id="card-id">
+                <div class="form-group">
+                    <label for="form-question">Question</label>
+                    <textarea id="form-question" rows="2" required placeholder="Enter the question front text..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="form-answer">Answer</label>
+                    <textarea id="form-answer" rows="2" required placeholder="Enter the answer back text..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="hideForm()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="form-submit-btn">Save Card</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript File Link -->
+    <script src="script.js"></script>
+</body>
+</html>
